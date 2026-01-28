@@ -1,0 +1,32 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    // 忽略 this 的类型检查, Raise error on this expressions with an implied any type.
+    "noImplicitThis": true,
+    "noImplicitAny": false,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "lib": ["esnext", "dom"],
+    "types": ["vite/client", "node", "element-plus/global"],
+    "baseUrl": ".", // 基础路径为项目根目录
+    "paths": {
+      "@/*": ["src/*"], // @ 映射到 src
+      "@api/*": ["src/api/*"], // 自定义别名映射
+      "@hooks/*": ["src/composables/*"],
+      "@stores/*": ["src/stores/*"],
+    }
+  },
+  "include": ["/src/**/*.ts", "/src/**/*.d.ts", "/src/**/*.tsx", "/src/**/*.vue", "/src/*.d.ts"],
+  // ts 排除的文件
+  "exclude": ["node_modules"]
+}
