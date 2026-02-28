@@ -1,0 +1,9 @@
+# Ignore build output
+dist/
+
+# Node.js
+node_modules/
+
+# Optional: environment files
+.env
+.env.*
