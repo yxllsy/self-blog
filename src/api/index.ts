@@ -7,6 +7,13 @@ export const commonApi = {
             params
         });
     },
+    getUserLocation(params: object) {
+        return request({
+            url: '/manage/getUserLocation',
+            method: 'get',
+            params
+        });
+    },
     getArticleList(params: object) {
         return request({
             url: '/article/getAllArticle',
