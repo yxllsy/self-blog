@@ -29,7 +29,7 @@
 import { onMounted, ref } from "vue";
 import moment from "moment";
 import {commonApi} from "@/api";
-import { generateChineseName } from "@/utils/utils"
+import { generateChineseName, getDeviceType } from "@/utils/utils"
 import {ElMessage, ElMessageBox} from "element-plus";
 interface locationInfo {
   province: string;
@@ -85,6 +85,15 @@ const getArticleList = () => {
   })
 }
 onMounted(() => {
+  const visitType = getDeviceType()
+  commonApi
+    .getUserLocation({ visitType, visitModule: '畅言' })
+    .then((res: any) => {
+      console.log("User location:", res);
+    })
+    .catch((err: any) => {
+      console.error("Error fetching user location:", err);
+    });
   getArticleList()
 });
 /**

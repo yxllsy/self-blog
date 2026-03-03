@@ -1,3 +1,11 @@
+/*
+ * @Autor: ysl
+ * @Date: 2024-08-23 18:06:03
+ * @LastEditors: ysl
+ * @LastEditTime: 2026-03-03 17:38:59
+ * @Description: 
+ * @FilePath: /self-blog/src/router/index.ts
+ */
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 const routes: Array<RouteRecordRaw> = [
     {

@@ -44,7 +44,7 @@ import { useRoute } from "vue-router";
 import BgLayer from "./components/BackgroundLayer.vue";
 import HeaderLayout from "./components/headerLayout.vue";
 import UserLayout from "./components/userLayout.vue";
-import { isMobileOrPc } from "@/utils/utils";
+import { isMobileOrPc, getDeviceType } from "@/utils/utils";
 import { commonApi } from "@/api";
 
 // 移动端 rem 单位适配
@@ -100,25 +100,9 @@ watch(
 // 组件挂载时初始化路由状态
 onMounted(() => {
   routeChange(route);
-  let u = navigator.userAgent;
-  let visitType = "PC";
-  let isHarmonyOS = /HarmonyOS|OpenHarmony|ArkWeb/.test(u);
-  if (
-    u.indexOf("Android") < 0 &&
-    u.indexOf("Linux") < 0 &&
-    u.indexOf("iPhone") < 0 &&
-    u.indexOf("Windows Phone") < 0 &&
-    u.indexOf("MiniProgram") < 0 &&
-    u.indexOf("Phone") < 0 &&
-    u.indexOf("Harmony") < 0 &&
-    !isHarmonyOS // 新增：排除鸿蒙系统
-  ) {
-    visitType = "PC";
-  } else {
-    visitType = "MOBILE";
-  }
+  const visitType = getDeviceType()
   commonApi
-    .getUserLocation({ visitType })
+    .getUserLocation({ visitType, visitModule: '首页' })
     .then((res: any) => {
       console.log("User location:", res);
     })

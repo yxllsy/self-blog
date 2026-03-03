@@ -46,7 +46,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRouteHelper } from "@hooks/useRouteHelper";
-import { isMobileOrPc } from "@/utils/utils";
+import { isMobileOrPc, getDeviceType } from "@/utils/utils";
 const { getParamsParam, getQueryParam } = useRouteHelper()
 import moment from "moment";
 import {commonApi} from "@/api";
@@ -56,6 +56,15 @@ const formatDate = (dateString) => {
 };
 onMounted(() => {
   const articleId = getParamsParam('id');
+  const visitType = getDeviceType()
+  commonApi
+    .getUserLocation({ visitType, visitModule: '文章页' })
+    .then((res) => {
+      console.log("User location:", res);
+    })
+    .catch((err) => {
+      console.error("Error fetching user location:", err);
+    });
   commonApi.getArticle({
     id: articleId,
   }).then((res) => {

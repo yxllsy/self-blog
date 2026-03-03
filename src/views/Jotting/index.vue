@@ -11,6 +11,7 @@
   import { onMounted, ref } from "vue";
   import moment from "moment";
   import {commonApi} from "@/api";
+  import { getDeviceType } from "@/utils/utils";
   interface Article {
     id: string | number;
     content: string;
@@ -30,6 +31,15 @@
   };
 
   onMounted(() => {
+  const visitType = getDeviceType()
+  commonApi
+    .getUserLocation({ visitType, visitModule: '心情随笔' })
+    .then((res: any) => {
+      console.log("User location:", res);
+    })
+    .catch((err: any) => {
+      console.error("Error fetching user location:", err);
+    });
     commonApi.getArticleList({
       currentPage: 1,
       limit: 9999,

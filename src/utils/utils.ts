@@ -171,3 +171,25 @@ const getRandomInt = (min: number, max: number) => {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
+
+export function getDeviceType() {
+  let u = navigator.userAgent;
+  let visitType = "PC";
+  let isHarmonyOS = /HarmonyOS|OpenHarmony|ArkWeb/.test(u);
+  if (
+    u.indexOf("Android") < 0 &&
+    u.indexOf("Linux") < 0 &&
+    u.indexOf("iPhone") < 0 &&
+    u.indexOf("Windows Phone") < 0 &&
+    u.indexOf("MiniProgram") < 0 &&
+    u.indexOf("Phone") < 0 &&
+    u.indexOf("Harmony") < 0 &&
+    !isHarmonyOS // 新增：排除鸿蒙系统
+  ) {
+    visitType = "PC";
+  } else {
+    visitType = "MOBILE";
+  }
+  return visitType;
+}
+  
